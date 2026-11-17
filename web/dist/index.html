@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Remove known tracking parameters from social links.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="icon" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./style.css">
+  <title>Private Links — Social link cleaner</title>
+  <script defer src="./cleaner.js"></script>
+  <script defer src="./languages.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="brand" href="#cleaner"><span class="mark" aria-hidden="true"><i></i><i></i></span> Private Links</a>
+      <details id="language-menu">
+        <summary id="current-language" aria-label="Language"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#012169"/><path d="M0 0l30 20M30 0L0 20" stroke="#fff" stroke-width="5"/><path d="M0 0l30 20M30 0L0 20" stroke="#c8102e" stroke-width="2"/><path d="M15 0v20M0 10h30" stroke="#fff" stroke-width="7"/><path d="M15 0v20M0 10h30" stroke="#c8102e" stroke-width="4"/></svg><span>English</span><span class="chevron" aria-hidden="true">⌄</span></summary>
+        <ul class="language-list">
+          <li><button type="button" data-locale="en-GB" lang="en-GB"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#012169"/><path d="M0 0l30 20M30 0L0 20" stroke="#fff" stroke-width="5"/><path d="M0 0l30 20M30 0L0 20" stroke="#c8102e" stroke-width="2"/><path d="M15 0v20M0 10h30" stroke="#fff" stroke-width="7"/><path d="M15 0v20M0 10h30" stroke="#c8102e" stroke-width="4"/></svg><span>English</span></button></li>
+          <li><button type="button" data-locale="ar-IQ" lang="ar-IQ"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><path fill="#ce1126" d="M0 0h30v7H0z"/><path fill="#fff" d="M0 7h30v6H0z"/><path d="M0 13h30v7H0z"/><text x="15" y="11.6" text-anchor="middle" fill="#007a3d" font-size="4.8" font-family="Arial,sans-serif" font-weight="bold">الله أكبر</text></svg><span>العربية (العراق)</span></button></li>
+          <li><button type="button" data-locale="de-DE" lang="de-DE"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><path d="M0 0h30v7H0z"/><path fill="#d00" d="M0 7h30v6H0z"/><path fill="#ffce00" d="M0 13h30v7H0z"/></svg><span>Deutsch</span></button></li>
+          <li><button type="button" data-locale="es-ES" lang="es-ES"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><path fill="#aa151b" d="M0 0h30v20H0z"/><path fill="#f1bf00" d="M0 5h30v10H0z"/><path fill="#aa151b" d="M7 8h4v5H7z"/></svg><span>Español</span></button></li>
+          <li><button type="button" data-locale="fr-FR" lang="fr-FR"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><path fill="#0055a4" d="M0 0h10v20H0z"/><path fill="#fff" d="M10 0h10v20H10z"/><path fill="#ef4135" d="M20 0h10v20H20z"/></svg><span>Français</span></button></li>
+          <li><button type="button" data-locale="tr-TR" lang="tr-TR"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><path fill="#e30a17" d="M0 0h30v20H0z"/><circle cx="12" cy="10" r="5" fill="#fff"/><circle cx="13.8" cy="9.8" r="4" fill="#e30a17"/><path fill="#fff" d="m18 7 .7 2.1H21l-1.8 1.3.7 2.2-1.9-1.4-1.8 1.4.7-2.2-1.8-1.3h2.2z"/></svg><span>Türkçe</span></button></li>
+          <li><button type="button" data-locale="zh-Hans" lang="zh-Hans"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#de2910"/><path fill="#ffde00" d="m5 2 .8 2.3h2.4l-1.9 1.4.7 2.3-2-1.4L3 8l.7-2.3-1.9-1.4h2.4z"/><g fill="#ffde00"><path d="m10 1 .2.8h.9l-.7.5.3.8-.7-.5-.7.5.3-.8-.7-.5h.9z"/><path d="m10 1 .2.8h.9l-.7.5.3.8-.7-.5-.7.5.3-.8-.7-.5h.9z" transform="translate(2 2)"/><path d="m10 1 .2.8h.9l-.7.5.3.8-.7-.5-.7.5.3-.8-.7-.5h.9z" transform="translate(2 5)"/><path d="m10 1 .2.8h.9l-.7.5.3.8-.7-.5-.7.5.3-.8-.7-.5h.9z" transform="translate(0 7)"/></g></svg><span>简体中文</span></button></li>
+          <li><button type="button" data-locale="ko-KR" lang="ko-KR"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><g transform="rotate(33 15 10)"><circle cx="15" cy="10" r="5" fill="#cd2e3a"/><path d="M10 10a5 5 0 0 0 10 0 2.5 2.5 0 0 0-5 0 2.5 2.5 0 0 1-5 0" fill="#0047a0"/></g><path stroke="#000" stroke-width=".7" d="m3 7 3.5-5m-2.4 5.7 3.5-5m-2.4 5.7 3.5-5m12.5 13 1.4-2m.7-.9 1.4-2m-2.4 5.7 1.4-2m.7-.9 1.4-2m-2.4 5.7 1.4-2m.7-.9 1.4-2M21.2 3.4l1.4 2m.7.9 1.4 2m-2.4-5.7 3.5 5m-2.4-5.7 1.4 2m.7.9 1.4 2M3 13l1.4 2m.7.9 1.4 2m-2.4-5.7 3.5 5m-2.4-5.7 1.4 2m.7.9 1.4 2"/></svg><span>한국어</span></button></li>
+          <li><button type="button" data-locale="ja-JP" lang="ja-JP"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/></svg><span>日本語</span></button></li>
+          <li><button type="button" data-locale="ms-MY" lang="ms-MY"><svg class="flag" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><path stroke="#cc0001" stroke-width="1.43" d="M0 .715h30M0 3.57h30M0 6.43h30M0 9.28h30M0 12.14h30M0 15h30M0 17.86h30"/><path fill="#010066" d="M0 0h16v11.43H0z"/><circle cx="6.6" cy="5.7" r="3.9" fill="#fc0"/><circle cx="7.9" cy="5.55" r="3.45" fill="#010066"/><path fill="#fc0" d="m11.5 2.2.4 2.2 1.7-1.5-.8 2 2.2-.4-1.8 1.2 2 1-2.2-.1 1 1.9-1.8-1.2-.2 2.2-.7-2.1-1.5 1.6.6-2.1-2.1.5 1.7-1.4-2.1-.8 2.2-.1-1.1-1.8 1.8 1.1z"/></svg><span>Bahasa Melayu</span></button></li>
+        </ul>
+      </details>
+    </div>
+  </header>
+  <main>
+    <section id="cleaner" aria-labelledby="title">
+    <div class="hero">
+      <div class="hero-icon" aria-hidden="true"><span class="mark"><i></i><i></i></span><b>✓</b></div>
+      <h1 id="title" data-i18n="title">Your privacy matters, get it back!</h1>
+      <p data-i18n="intro">Get back to the original link with known trackers and sharing IDs removed.</p>
+    </div>
+    <div class="panel">
+      <form id="clean-form">
+        <div class="input-header">
+          <label for="source" data-i18n="original">Original link</label>
+          <button class="quiet" id="example" type="button"><span data-i18n="example">Try an example</span> <span aria-hidden="true">↗</span></button>
+        </div>
+        <textarea id="source" dir="auto" rows="3" placeholder="Paste a link or shared message…" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+        <button class="primary" id="clean" type="submit"><span data-i18n="cleanCopy">Clean &amp; copy</span><span class="arrow" aria-hidden="true">→</span></button>
+      </form>
+      <p id="status" role="status" aria-atomic="true" hidden></p>
+      <div id="result" hidden>
+        <label for="output" data-i18n="cleaned">Cleaned link</label>
+        <div class="output-row">
+          <input id="output" dir="ltr" readonly spellcheck="false">
+          <button id="copy" class="secondary" type="button" data-i18n="copy">Copy</button>
+        </div>
+      </div>
+      <div id="short-help" hidden>
+        <a class="secondary" id="open-short" rel="noopener noreferrer" target="_blank" data-i18n="openOriginal">Open original</a>
+      </div>
+    </div>
+    <section class="platforms" aria-labelledby="platform-title">
+      <h2 id="platform-title" data-i18n="platforms">Supported platforms</h2>
+      <ul><li>Instagram</li><li>TikTok</li><li>Facebook</li><li>YouTube</li><li>X</li><li>Reddit</li><li>Threads</li><li>LinkedIn</li><li>Pinterest</li><li>Snapchat</li></ul>
+    </section>
+    <footer class="project-note">
+      <p data-i18n="disclaimer">Free and open source. No ads. We don’t log your links on our servers.</p>
+      <p><a href="https://github.com/Myth87/Private-Links" target="_blank" rel="noopener noreferrer" data-i18n="githubNote">Source code on GitHub</a></p>
+    </footer>
+    </section>
+    <section id="history" class="subpage" aria-labelledby="history-title" hidden>
+      <div class="page-heading">
+        <div><h1 id="history-title" data-i18n="history">History</h1><p data-i18n="historyIntro">Only cleaned links are saved in this browser on this device.</p></div>
+        <button class="secondary danger" id="clear-history" type="button" data-i18n="clearAll" hidden>Clear all</button>
+      </div>
+      <div class="panel empty" id="history-empty" data-i18n="empty">No cleaned links yet.</div>
+      <ul id="history-list" class="history-list"></ul>
+      <p id="history-status" class="feedback" role="status" hidden></p>
+      <dialog id="clear-dialog" aria-labelledby="clear-title">
+        <h2 id="clear-title" data-i18n="clearTitle">Clear all history?</h2>
+        <p data-i18n="clearBody">This deletes all cleaned links saved in this browser.</p>
+        <form method="dialog"><button class="secondary" value="cancel" data-i18n="cancel" autofocus>Cancel</button><button class="secondary danger" value="clear" data-i18n="clearAll">Clear all</button></form>
+      </dialog>
+    </section>
+    <section id="about" class="subpage" aria-labelledby="about-title" hidden>
+      <div class="page-heading"><div><h1 id="about-title" data-i18n="about">About</h1><p data-i18n="aboutIntro">Private Links helps you share links without known tracking and sharing IDs.</p></div></div>
+      <div class="panel about-panel">
+        <h2 data-i18n="privacy">Your privacy</h2>
+        <p data-i18n="shareRisk">Some share links carry a unique ID that can tie a click back to the original sharer or their account. Forwarding the same link can pass that ID to people you never intended to share it with.</p>
+        <p id="privacy" data-i18n="privacyDetails">We don’t store copies of the links you share or clean on our servers. If you use History, cleaned links and timestamps are saved only on this device.</p>
+        <p data-i18n="platformLogs">Platforms can still log visits and identify signed-in users.</p>
+      </div>
+      <div class="panel about-panel settings">
+        <label for="theme"><span data-i18n="appearance">Appearance</span></label>
+        <select id="theme"><option value="dark" data-i18n="dark">AMOLED black</option><option value="light" data-i18n="light">Light</option></select>
+      </div>
+      <div class="panel about-panel about-links">
+        <a href="https://www.versesbgw.com/APP/links/privacy-policy.html" target="_blank" rel="noopener noreferrer" data-i18n="privacyPolicy">Privacy Policy</a>
+        <a href="https://www.versesbgw.com/APP/links/legal-notes.html" target="_blank" rel="noopener noreferrer" data-i18n="legal">Legal Notes</a>
+        <a href="https://github.com/Myth87/Private-Links" target="_blank" rel="noopener noreferrer" data-i18n="githubNote">Source code on GitHub</a>
+      </div>
+      <button class="secondary" type="button" id="install" data-i18n="install" hidden>Install app</button>
+    </section>
+  </main>
+  <nav class="bottom-nav" aria-label="App tabs">
+    <div class="nav-inner">
+      <a href="#cleaner" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a4 4 0 0 0 5.7.1l3-3a4 4 0 0 0-5.7-5.7l-1.7 1.7"/><path d="M14 11a4 4 0 0 0-5.7-.1l-3 3a4 4 0 0 0 5.7 5.7l1.7-1.7"/></svg><span data-i18n="cleaner">Cleaner</span></a>
+      <a href="#history"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 1 2.5 6"/><path d="M3.5 7v5h5M12 8v4l2.5 2"/></svg><span data-i18n="history">History</span></a>
+      <a href="#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5m0-8h.01"/></svg><span data-i18n="about">About</span></a>
+    </div>
+  </nav>
+</body>
+</html>

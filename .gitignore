@@ -1,0 +1,11 @@
+/android/build/
+/web/dist/server/
+/web/.openai/
+*.jks
+*.keystore
+*.aab
+*.apk
+*.apks
+local.properties
+.env
+.env.*
